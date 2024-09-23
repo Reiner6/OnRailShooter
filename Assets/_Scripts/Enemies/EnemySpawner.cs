@@ -11,6 +11,7 @@ namespace RailShooter.Enemies
         [SerializeField] Transform enemyParent;
         [SerializeField] Transform flightPathParent;
 
+        [SerializeField] bool parentLessSpawn;
         float spawnTimer =5f;
 
 
@@ -27,15 +28,15 @@ namespace RailShooter.Enemies
         private void SpawnEnemy()
         {
             var flightPath = FlightPathFactory.GenerateFlightPath(radii);
-            EnemyFactory.GenerateEnemy(enemyPrefab, flightPath, enemyParent, flightPathParent);
+            EnemyFactory.GenerateEnemy(enemyPrefab, flightPath, enemyParent, flightPathParent, parentLessSpawn);
         }
 
         private void OnDrawGizmos()
         {
             foreach(var radius in radii)
             {
-                DebugExtension.DrawCircle(this.transform.position + (this.transform.forward* radius.distance),this.transform.forward,radius.innerRadius);
-                DebugExtension.DrawCircle(this.transform.position + (this.transform.forward *radius.distance), this.transform.forward, radius.outerRadius);
+                DebugExtension.DrawCircle(this.transform.position + (this.transform.forward* radius.distance) + (this.transform.up * radius.verticalOffset),this.transform.forward,radius.innerRadius);
+                DebugExtension.DrawCircle(this.transform.position + (this.transform.forward *radius.distance) + (this.transform.up * radius.verticalOffset), this.transform.forward, radius.outerRadius);
 
             }
         }

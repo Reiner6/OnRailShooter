@@ -28,9 +28,14 @@ namespace RailShooter.Enemies
             return this;
         }
 
-        public Enemy build(Transform enemyParent)
+        public void setPosition(Vector3 position)
         {
-            var enemy = Object.Instantiate(enemyPrefab, enemyParent);
+
+        }
+
+        public Enemy build(Transform enemyParent, bool parentless)
+        {
+            var enemy = Object.Instantiate(enemyPrefab, parentless? null: enemyParent);
 
             enemy.FlightPath = flightPath;
 
@@ -46,9 +51,17 @@ namespace RailShooter.Enemies
             {
                 Transform transform;
                 transform = flightPath.transform;
-                transform.SetParent(flightPathParent);
-                transform.localPosition = Vector3.zero;
-                transform.localRotation = Quaternion.identity;
+                if(parentless)
+                {
+                    transform.position = flightPathParent.position;
+                    transform.rotation = flightPathParent.rotation;
+                }
+                else
+                {
+                    transform.SetParent(flightPathParent);
+                    transform.localPosition = Vector3.zero;
+                    transform.localRotation = Quaternion.identity;
+                }
             }
 
             return enemy;

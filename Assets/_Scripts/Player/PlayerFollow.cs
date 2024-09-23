@@ -6,24 +6,6 @@ using UnityEngine.Splines;
 
 namespace RailShooter.Player
 {
-    [System.Serializable]
-    public class SplinePathData
-    {
-        public SliceData[] slices;
-    }
-
-    [System.Serializable]
-    public class SliceData
-    {
-        public int splineIndex;
-        public SplineRange splineRange;
-
-        public bool isEnabled = true;
-        public float sliceLenght;
-        public float distanceFromStart;
-    }
-
-
     public class PlayerFollow : MonoBehaviour
     {
         [SerializeField] private SplineContainer container;
@@ -70,7 +52,7 @@ namespace RailShooter.Player
             return slices;
         }
 
-        IEnumerator FollowCoroutine()
+        private IEnumerator FollowCoroutine()
         {
             for(var n = 0; ; ++n)
             {
@@ -97,6 +79,5 @@ namespace RailShooter.Player
                 path = new SplinePath(CalculatePath());
             }
         }
-
     }
 }
