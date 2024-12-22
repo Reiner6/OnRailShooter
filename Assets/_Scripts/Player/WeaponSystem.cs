@@ -66,8 +66,7 @@ namespace RailShooter.Player
 
         private void OnDrawGizmos()
         {
-            DebugExtension.DrawLocalCube(transform, new Vector3(aimLimit.x, aimLimit.y, 0.5f) * 2f, transform.InverseTransformPoint(transform.position + transform.forward * targetDistance));
-            
+            DebugExtension.DrawLocalCube(transform, new Vector3(aimLimit.x, aimLimit.y, 0.5f) * 2f, transform.InverseTransformPoint(transform.position + transform.forward * targetDistance));           
         }
     }
 }

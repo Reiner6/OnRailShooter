@@ -13,11 +13,16 @@ namespace RailShooter.Camera
         private Vector3 velocity;
         private void Update()
         {
-            TargetPosition();
+            SetOffset();
+            SetPositionAndRotation();
+        }
+
+        protected void SetPositionAndRotation()
+        {
             transform.SetPositionAndRotation(Vector3.SmoothDamp(transform.position, offsetCamera, ref velocity, smoothTime), player.rotation);
         }
 
-        protected virtual void TargetPosition()
+        protected virtual void SetOffset()
         {
             offsetCamera = followTarget.position + followTarget.forward * -followDistance;
         }

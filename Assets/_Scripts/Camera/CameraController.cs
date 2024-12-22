@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace RailShooter.Camera
@@ -11,14 +10,15 @@ namespace RailShooter.Camera
         {
             if(updatePosition)
             {
-                TargetPosition();
+                SetOffset();
+                SetPositionAndRotation();
                 updatePosition = false;
             }
         }
 
-        protected override void TargetPosition()
+        protected override void SetOffset()
         {
-            base.TargetPosition();
+            base.SetOffset();
             offsetCamera += followTarget.up * verticalOffset;
         }
     }
